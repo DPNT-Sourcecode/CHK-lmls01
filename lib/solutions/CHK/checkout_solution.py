@@ -4,6 +4,9 @@ from collections import defaultdict
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+
+    # validate
+
     basket = defaultdict(int)
     for sku in skus:
         basket[sku] += 1
@@ -23,10 +26,9 @@ def checkout(skus):
             basket_sum += val * 20
         if key == 'D':
             basket_sum += val * 15
+
     return basket_sum
 
-
-# checkout("AAABBCD")
 
 
 
