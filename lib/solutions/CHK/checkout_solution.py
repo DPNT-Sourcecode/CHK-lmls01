@@ -72,14 +72,14 @@ def checkout(skus):
     basket_total = 0
 
     # also modifies the basket
-    basket_total += calc_basket_deal_value(basket, basket_total, double_bulk_prices)
+    basket_total = calc_basket_deal_value(basket, basket_total, double_bulk_prices)
     print("basket after first calc")
     print(basket)
     print("total now: " + str(basket_total))
-    basket_total += calc_basket_deal_value(basket, basket_total, bulk_prices)
+    basket_total = calc_basket_deal_value(basket, basket_total, bulk_prices)
     print(basket)
     print("total now: " + str(basket_total))
-    basket_total += calc_basket_simple_values(basket, simple_prices, basket_total)
+    basket_total = calc_basket_simple_values(basket, simple_prices, basket_total)
     print(basket)
     print("total now: " + str(basket_total))
 
@@ -146,3 +146,4 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
+
