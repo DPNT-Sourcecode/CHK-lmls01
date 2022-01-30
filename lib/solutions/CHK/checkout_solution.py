@@ -11,7 +11,7 @@ simple_prices = {
     'H': 10,
     'I': 35,
     'J': 60,
-    'K': 80,
+    'K': 70,
     'L': 90,
     'M': 15,
     'N': 40,
@@ -19,14 +19,14 @@ simple_prices = {
     'P': 50,
     'Q': 30,
     'R': 50,
-    'S': 30,
+    'S': 20,
     'T': 20,
     'U': 40,
     'V': 50,
     'W': 20,
-    'X': 90,
-    'Y': 10,
-    'Z': 50,
+    'X': 17,
+    'Y': 20,
+    'Z': 21,
 }
 
 bulk_prices = {
@@ -34,7 +34,7 @@ bulk_prices = {
     'B': (2, 45),
     'F': (3, 20),
     'H': (5, 45),
-    'K': (2, 150),
+    'K': (2, 120),
     'P': (5, 200),
     'Q': (3, 80),
     'U': (4, 120),
@@ -114,3 +114,4 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
+

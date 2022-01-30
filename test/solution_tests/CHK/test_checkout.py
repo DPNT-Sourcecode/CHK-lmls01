@@ -20,3 +20,7 @@ class TestCheckout2:
     def test_invalid(self):
         assert checkout_solution.checkout("y") == -1
         assert checkout_solution.checkout("2") == -1
+
+    def test_group_deal(self):
+        assert checkout_solution.checkout("ZXZZ") == 62
+
