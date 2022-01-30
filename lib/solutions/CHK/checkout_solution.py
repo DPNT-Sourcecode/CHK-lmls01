@@ -16,13 +16,16 @@ def checkout(skus):
         basket[sku] += 1
     print(basket)
 
+    # modify basket with freebies
+    basket['B'] = calc_number_of_new_bs(basket)
+
     # calc sum
     basket_sum = 0
     for key, val in basket.items():
         if key == 'A':
-            # a_five, a_five_rem = divmod(val, 5)
-            # basket_sum += a_five
-            a_triples, a_remainder = divmod(val, 3)
+            a_fives, a_five_rem = divmod(val, 5)
+            basket_sum += a_fives * 200
+            a_triples, a_remainder = divmod(a_five_rem, 3)
             basket_sum += a_triples * 130
             basket_sum += a_remainder * 50
         if key == 'B':
@@ -33,5 +36,20 @@ def checkout(skus):
             basket_sum += val * 20
         if key == 'D':
             basket_sum += val * 15
+        if key == 'E':
+            basket_sum += val * 40
 
     return basket_sum
+
+
+# does not modify basket
+def calc_number_of_new_bs(basket):
+    (number_of_free_bs, _) = divmod(basket['E'], 2)
+    existing_bs = basket['B']
+    new_bs = existing_bs - number_of_free_bs
+    print("new b number")
+    print(new_bs)
+    if new_bs < 0:
+        return 0
+    return new_bs
+
