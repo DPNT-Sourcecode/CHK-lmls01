@@ -47,6 +47,12 @@ double_bulk_prices = {
     'V': (3, 130),
 }
 
+freebies = {
+    'E': (2, 'B'),
+    'N': (3, 'M'),
+    'R': (3, 'Q'),
+}
+
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -61,48 +67,22 @@ def checkout(skus):
     for sku in skus:
         basket[sku] += 1
 
-    print("basket before freebies")
-    print(basket)
     # modify basket with freebies
-    modify_basket_for_freebies(basket)
-    print("basket after freebies")
-    print(basket)
+    modify_basket_for_freebies(basket, freebies)
 
     # calc sum
     basket_total = 0
 
     # also modifies the basket
     basket_total = calc_basket_deal_value(basket, basket_total, double_bulk_prices)
-    print("basket after first calc")
-    print(basket)
-    print("total now: " + str(basket_total))
     basket_total = calc_basket_deal_value(basket, basket_total, bulk_prices)
-    print(basket)
-    print("total now: " + str(basket_total))
     basket_total = calc_basket_simple_values(basket, simple_prices, basket_total)
-    print(basket)
-    print("total now: " + str(basket_total))
 
     return basket_total
 
 
-# does not modify basket
-def calc_number_of_new_bs(basket):
-    (number_of_free_bs, _) = divmod(basket['E'], 2)
-    existing_bs = basket['B']
-    new_bs = existing_bs - number_of_free_bs
-    if new_bs < 0:
-        return 0
-    return new_bs
-
-
 # amends basket
-def modify_basket_for_freebies(basket):
-    freebies = {
-        'E': (2, 'B'),
-        'N': (3, 'M'),
-        'R': (3, 'Q'),
-    }
+def modify_basket_for_freebies(basket, freebies):
     for qualifying_sku, val in freebies.items():
         number_of_qualifying_skus = val[0]
         potential_reduction_sku = val[1]
@@ -128,11 +108,11 @@ def calc_basket_deal_value(basket, basket_running_total, deal_prices):
     return basket_running_total
 
 
-
 def calc_basket_simple_values(basket, simple_prices, basket_running_total):
     for key, total in basket.items():
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
+
 
 
