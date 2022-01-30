@@ -53,7 +53,7 @@ double_bulk_prices = {
 def checkout(skus):
     # validate
     for char in skus:
-        if char not in 'ABCDEF':
+        if char not in simple_prices.keys():
             return -1
 
     # get basket
@@ -132,7 +132,7 @@ def modify_basket_for_freebies(basket):
 # outputs current total and reduces the number of skus in basket after calculation
 def calc_basket_deal_value(basket, basket_running_total, deal_prices):
     for price_sku, bulk_tuple in deal_prices.items():
-        for basket_sku, basket_count in basket:
+        for basket_sku, basket_count in basket.items():
             if basket_sku == price_sku:
                 required_number_for_deal = bulk_tuple[0]
                 number_of_deals, _ = divmod(basket_count, required_number_for_deal)
@@ -160,4 +160,5 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
+
 
