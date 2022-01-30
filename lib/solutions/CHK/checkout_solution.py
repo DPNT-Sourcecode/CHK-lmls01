@@ -92,9 +92,8 @@ def modify_basket_for_freebies(basket, freebies):
         reduced_skus = existing_skus_to_be_reduced - number_of_max_free_items
         if reduced_skus < 0:
             basket[potential_reduction_sku] = 0
-        print(basket)
-        basket[potential_reduction_sku] = reduced_skus
-        print(basket)
+        else:
+            basket[potential_reduction_sku] = reduced_skus
 
 
 # outputs current total and reduces the number of skus in basket after calculation
@@ -115,6 +114,7 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
+
 
 
 
