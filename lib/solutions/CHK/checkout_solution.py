@@ -9,14 +9,24 @@ def checkout(skus):
         basket[sku] += 1
     print(basket)
 
-    for key, val in basket:
+    basket_sum = 0
+    for key, val in basket.items():
         if key == 'A':
-            
+            a_triples, a_remainder = divmod(val, 3)
+            basket_sum += a_triples * 130
+            basket_sum += a_remainder * 50
+        if key == 'B':
+            b_doubles, b_remainder = divmod(val, 2)
+            basket_sum += b_doubles * 45
+            basket_sum += b_remainder * 30
+        if key == 'C':
+            basket_sum += val * 20
+        if key == 'D':
+            basket_sum += val * 15
+    return basket_sum
 
-    return 10
 
-
-checkout("AAABBCD")
+# checkout("AAABBCD")
 
 
 
