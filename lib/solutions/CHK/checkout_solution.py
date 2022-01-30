@@ -44,9 +44,8 @@ bulk_prices = {
 double_bulk_prices = {
     'A': (5, 200),
     'H': (10, 80),
-    'V': (3, 130)
+    'V': (3, 130),
 }
-
 
 
 # noinspection PyUnusedLocal
@@ -65,32 +64,40 @@ def checkout(skus):
     # modify basket with freebies
     modify_basket_for_freebies(basket)
 
-
     # calc sum
-    basket_sum = 0
-    for key, val in basket.items():
-        if key == 'A':
-            a_fives, a_five_rem = divmod(val, 5)
-            basket_sum += a_fives * 200
-            a_triples, a_remainder = divmod(a_five_rem, 3)
-            basket_sum += a_triples * 130
-            basket_sum += a_remainder * 50
-        if key == 'B':
-            b_doubles, b_remainder = divmod(val, 2)
-            basket_sum += b_doubles * 45
-            basket_sum += b_remainder * 30
-        if key == 'C':
-            basket_sum += val * 20
-        if key == 'D':
-            basket_sum += val * 15
-        if key == 'E':
-            basket_sum += val * 40
-        if key == 'F':
-            f_triples, f_remainder = divmod(val, 3)
-            basket_sum += f_triples * 20
-            basket_sum += f_remainder * 10
+    basket_total = 0
 
-    return basket_sum
+    # also modifies the basket
+    basket_total += calc_basket_deal_value(basket, basket_total, double_bulk_prices)
+    basket_total += calc_basket_deal_value(basket, basket_total, bulk_prices)
+    basket_total += calc_basket_simple_values(basket, simple_prices, basket_total)
+
+    return basket_total
+
+
+    # for key, val in basket.items():
+    #     if key == 'A':
+    #         a_fives, a_five_rem = divmod(val, 5)
+    #         basket_sum += a_fives * 200
+    #         a_triples, a_remainder = divmod(a_five_rem, 3)
+    #         basket_sum += a_triples * 130
+    #         basket_sum += a_remainder * 50
+    #     if key == 'B':
+    #         b_doubles, b_remainder = divmod(val, 2)
+    #         basket_sum += b_doubles * 45
+    #         basket_sum += b_remainder * 30
+    #     if key == 'C':
+    #         basket_sum += val * 20
+    #     if key == 'D':
+    #         basket_sum += val * 15
+    #     if key == 'E':
+    #         basket_sum += val * 40
+    #     if key == 'F':
+    #         f_triples, f_remainder = divmod(val, 3)
+    #         basket_sum += f_triples * 20
+    #         basket_sum += f_remainder * 10
+
+    return basket_total
 
 
 # does not modify basket
@@ -120,3 +127,37 @@ def modify_basket_for_freebies(basket):
         if reduced_skus < 0:
             basket[potential_reduction_sku] = 0
         basket[potential_reduction_sku] = reduced_skus
+
+
+# outputs current total and reduces the number of skus in basket after calculation
+def calc_basket_deal_value(basket, basket_running_total, deal_prices):
+    for price_sku, bulk_tuple in deal_prices.items():
+        for basket_sku, basket_count in basket:
+            if basket_sku == price_sku:
+                required_number_for_deal = bulk_tuple[0]
+                number_of_deals, _ = divmod(basket_count, required_number_for_deal)
+                basket_running_total += number_of_deals * bulk_tuple[1]
+                # modifying basket
+                basket[basket_sku] -= number_of_deals * required_number_for_deal
+    return basket_running_total
+
+        # if key == 'A':
+            # a_fives, a_five_rem = divmod(val, 5)
+            # basket_sum += a_fives * 200
+            # a_triples, a_remainder = divmod(a_five_rem, 3)
+            # basket_sum += a_triples * 130
+            # basket_sum += a_remainder * 50
+
+    # double_bulk_prices = {
+    #     'A': (5, 200),
+    #     'H': (10, 80),
+    #     'V': (3, 130)
+    # }
+
+
+def calc_basket_simple_values(basket, simple_prices, basket_running_total):
+    for key, total in basket.items():
+        basket_running_total += simple_prices[key] * total
+        basket[key] = 0
+    return basket_running_total
+
