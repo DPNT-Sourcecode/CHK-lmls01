@@ -8,5 +8,3 @@ class TestSum():
     def test_invalid(self):
         assert checkout_solution.checkout("Y") == -1
         assert checkout_solution.checkout("2") == -1
-
-

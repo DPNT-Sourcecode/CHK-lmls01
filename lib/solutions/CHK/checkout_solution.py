@@ -33,9 +33,3 @@ def checkout(skus):
             basket_sum += val * 15
 
     return basket_sum
-
-
-
-
-
-
