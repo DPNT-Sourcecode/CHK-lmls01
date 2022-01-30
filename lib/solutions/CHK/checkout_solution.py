@@ -3,4 +3,11 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    raise NotImplementedError()
+    basket = {
+        'a' = 0,
+
+    }
+    for sku in skus:
+        pass
+
+
