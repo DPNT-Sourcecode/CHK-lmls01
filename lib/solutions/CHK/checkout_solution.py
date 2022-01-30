@@ -120,4 +120,3 @@ def modify_basket_for_freebies(basket):
         if reduced_skus < 0:
             basket[potential_reduction_sku] = 0
         basket[potential_reduction_sku] = reduced_skus
-
