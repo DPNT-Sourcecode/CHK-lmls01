@@ -9,12 +9,15 @@ def checkout(skus):
         basket[sku] += 1
     print(basket)
 
-    
+    for key, val in basket:
+        if key == 'A':
+            
 
     return 10
 
 
 checkout("AAABBCD")
+
 
 
 
