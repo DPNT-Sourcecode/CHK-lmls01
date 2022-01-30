@@ -114,8 +114,3 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket_running_total += simple_prices[key] * total
         basket[key] = 0
     return basket_running_total
-
-
-
-
-
