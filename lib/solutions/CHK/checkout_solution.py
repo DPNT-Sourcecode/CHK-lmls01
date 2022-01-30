@@ -20,6 +20,8 @@ def checkout(skus):
     basket_sum = 0
     for key, val in basket.items():
         if key == 'A':
+            # a_five, a_five_rem = divmod(val, 5)
+            # basket_sum += a_five
             a_triples, a_remainder = divmod(val, 3)
             basket_sum += a_triples * 130
             basket_sum += a_remainder * 50
@@ -33,3 +35,4 @@ def checkout(skus):
             basket_sum += val * 15
 
     return basket_sum
+
