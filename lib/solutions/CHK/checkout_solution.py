@@ -1,13 +1,14 @@
+from collections import defaultdict
 
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    basket = {
-        'a' = 0,
-
-    }
+    basket = defaultdict(int)
     for sku in skus:
-        pass
+        basket[sku] += 1
+
+    print(basket)
+
 
 
