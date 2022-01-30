@@ -7,14 +7,13 @@ def checkout(skus):
 
     # validate
     for char in skus:
-        if char not in 'ABCDE':
+        if char not in 'ABCDEF':
             return -1
 
     # get basket
     basket = defaultdict(int)
     for sku in skus:
         basket[sku] += 1
-    print(basket)
 
     # modify basket with freebies
     basket['B'] = calc_number_of_new_bs(basket)
@@ -47,8 +46,7 @@ def calc_number_of_new_bs(basket):
     (number_of_free_bs, _) = divmod(basket['E'], 2)
     existing_bs = basket['B']
     new_bs = existing_bs - number_of_free_bs
-    print("new b number")
-    print(new_bs)
     if new_bs < 0:
         return 0
     return new_bs
+
