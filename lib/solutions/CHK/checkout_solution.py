@@ -52,4 +52,3 @@ def calc_number_of_new_bs(basket):
     if new_bs < 0:
         return 0
     return new_bs
-
