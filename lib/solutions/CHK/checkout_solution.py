@@ -6,12 +6,17 @@ from collections import defaultdict
 def checkout(skus):
 
     # validate
+    for char in skus:
+        if char not in 'ABCD':
+            return -1
 
+    # get basket
     basket = defaultdict(int)
     for sku in skus:
         basket[sku] += 1
     print(basket)
 
+    # calc sum
     basket_sum = 0
     for key, val in basket.items():
         if key == 'A':
@@ -28,6 +33,7 @@ def checkout(skus):
             basket_sum += val * 15
 
     return basket_sum
+
 
 
 
