@@ -37,6 +37,10 @@ def checkout(skus):
             basket_sum += val * 15
         if key == 'E':
             basket_sum += val * 40
+        if key == 'F':
+            f_triples, f_remainder = divmod(val, 3)
+            basket_sum += f_triples * 20
+            basket_sum += f_remainder * 10
 
     return basket_sum
 
@@ -49,4 +53,5 @@ def calc_number_of_new_bs(basket):
     if new_bs < 0:
         return 0
     return new_bs
+
 
