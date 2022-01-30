@@ -7,7 +7,7 @@ def checkout(skus):
 
     # validate
     for char in skus:
-        if char not in 'ABCD':
+        if char not in 'ABCDE':
             return -1
 
     # get basket
@@ -35,4 +35,5 @@ def checkout(skus):
             basket_sum += val * 15
 
     return basket_sum
+
 
