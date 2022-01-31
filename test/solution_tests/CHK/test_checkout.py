@@ -23,4 +23,3 @@ class TestCheckout2:
 
     def test_group_deal(self):
         assert checkout_solution.checkout("ZXZZ") == 62
-
