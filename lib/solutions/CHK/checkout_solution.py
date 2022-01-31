@@ -70,10 +70,9 @@ def checkout(skus):
     # modify basket with freebies
     modify_basket_for_freebies(basket, freebies)
 
-    # calc sum
-    basket_total = 0
-
     # also modifies the basket
+    basket_total = 0
+    basket_total = calc_group_deal(basket, basket_total)
     basket_total = calc_basket_deal_value(basket, basket_total, double_bulk_prices)
     basket_total = calc_basket_deal_value(basket, basket_total, bulk_prices)
     basket_total = calc_basket_simple_values(basket, simple_prices, basket_total)
@@ -126,10 +125,12 @@ def calc_group_deal(basket, basket_running_total):
     basket_running_total += number_of_deals * 45
 
     # reduce the skus in the basket form highest to lowest price
+    
     for i in range(number_of_deals):
         if basket[group_keys[i]] > 0:
             basket[group_keys[i]] -= 1
 
     return basket_running_total
+
 
 
