@@ -116,7 +116,7 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
 
 
 def calc_group_deal(basket, basket_running_total):
-    group_keys = ['S', 'T', 'Y', 'X', 'Z']  # the order is important - most to least value
+    group_keys = ['Z', 'S', 'T', 'Y', 'X']  # the order is important - most to least value
     group_total = 0
     for key in group_keys:
         group_total += basket[key]
@@ -137,4 +137,5 @@ def calc_group_deal(basket, basket_running_total):
             current_key += 1
 
     return basket_running_total
+
 
