@@ -115,3 +115,21 @@ def calc_basket_simple_values(basket, simple_prices, basket_running_total):
         basket[key] = 0
     return basket_running_total
 
+
+def calc_group_deal(basket, basket_running_total):
+    group_keys = ['S', 'T', 'Y', 'X', 'Z']  # the order is important - most to least value
+    group_total = 0
+    for key in group_keys:
+        group_total += basket[key]
+
+    number_of_deals, _ = divmod(group_total, 3)
+    basket_running_total += number_of_deals * 45
+
+    # reduce the skus in the basket form highest to lowest price
+    for i in range(number_of_deals):
+        if basket[group_keys[i]] > 0:
+            basket[group_keys[i]] -= 1
+
+    return basket_running_total
+
+
