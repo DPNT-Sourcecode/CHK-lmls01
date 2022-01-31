@@ -126,12 +126,15 @@ def calc_group_deal(basket, basket_running_total):
 
     # reduce the skus in the basket form highest to lowest price
     remaining_skus_to_remove = number_of_deals * 3
-    for i in range(number_of_deals):
-        current_key = 0
+    current_key = 0
+    while True:
+        if remaining_skus_to_remove == 0:
+            break
         if basket[group_keys[current_key]] > 0:
             basket[group_keys[current_key]] -= 1
-            number_of_deals -= 1
+            remaining_skus_to_remove -= 1
         else:
             current_key += 1
 
     return basket_running_total
+
